@@ -16,12 +16,12 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    
+
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     />
-    
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.72.0/L.Control.Locate.css"
@@ -148,12 +148,19 @@
     <section id="about">
       <h2>Driving to the Last Frontier</h2>
       <p>
-        While you <i>could</i> simply book a 3-hour flight to reach Alaska, why pass up on the roadtrip of a lifetime? After all, driving the Alaska Highway is a right of passage for those journeying to the Last Frontier. Taking upwards of 41 hours driving time, this beautiful and sometimes treacherous road will give you memories you'll never forget. Noted on the map are key stops to help you make the most of your trip, from large towns to rest stops to beautiful glimpses of the Yukon wilderness. Time to hit the open road! The data used for this map can be found
-        <a href="route.js">here.</a>
+        While you <i>could</i> simply book a 3-hour flight to reach Alaska, why
+        pass up on the roadtrip of a lifetime? After all, driving the Alaska
+        Highway is a right of passage for those journeying to the Last Frontier.
+        Taking upwards of 41 hours driving time, this beautiful and sometimes
+        treacherous road will give you memories you'll never forget. Noted on
+        the map are key stops to help you make the most of your trip, from large
+        towns to rest stops to beautiful glimpses of the Yukon wilderness. Time
+        to hit the open road! The data used for this map can be found
+        <a href="data/route.js">here.</a>
       </p>
       <p>Map authored by Tim Higginbotham</p>
     </section>
-    
+
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <script
@@ -161,7 +168,7 @@
       integrity="sha512-Gq+3lCPlR6oaTfAIvLeTbxvffhahkZqfiyEEu5ua7JIo9Wx1RlwHDkt0okgwjyTS303O3FKZPuyBDi/QKXvi7g=="
       crossorigin="anonymous"
     ></script>
-    <script src="route.js"></script>
+    <script src="data/route.js"></script>
     <script>
       var options = {
         center: [38.038685, -84.504164],
@@ -196,7 +203,7 @@
         subdomains: "abcd",
         maxZoom: 19,
       };
-      
+
       var tiles = L.tileLayer(basemap_url, basemap_attributes);
 
       map.addLayer(tiles);
@@ -224,7 +231,12 @@
           }
         },
         onEachFeature: function (feature, layer) {
-          layer.bindPopup("<b>" + feature.properties.name + "</b><br><br>" + feature.properties.info);
+          layer.bindPopup(
+            "<b>" +
+              feature.properties.name +
+              "</b><br><br>" +
+              feature.properties.info
+          );
           layer.on({
             click: function (e) {
               map.setView(e.latlng, map.getZoom() + 1);
