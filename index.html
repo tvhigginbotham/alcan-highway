@@ -16,12 +16,12 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <!-- Add Leaflet CSS library. Check to make sure it is latest version. -->
+    
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     />
-    <!-- Add Leaflet plugin CSS after Leaflet library. -->
+    
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.72.0/L.Control.Locate.css"
@@ -30,15 +30,14 @@
     />
 
     <link
-      href="https://fonts.googleapis.com/css?family=Quicksand:400,700"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Roboto&display=swap"
     />
-
     <style>
       body {
         margin: 0;
         padding: 0;
-        font-family: "Quicksand", sans-serif;
+        font-family: "Alata", sans-serif;
         font-size: 100%;
         color: #3d3d3d;
       }
@@ -49,11 +48,11 @@
         top: 10px;
         left: 15px;
         font-size: 1.5em;
-        font-family: "Quicksand", sans-serif;
+        font-family: "Roboto", sans-serif;
         font-weight: 700;
         letter-spacing: 0.04em;
         padding: 10px 15px;
-        /* Add styles to match Leaflet UI elements */
+        /* styles to match Leaflet UI */
         background: rgba(256, 256, 256, 0.3);
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         border: 1px solid #ddd;
@@ -62,7 +61,7 @@
       }
 
       h2 {
-        font-family: "Quicksand", sans-serif;
+        font-family: "Roboto", sans-serif;
         font-size: 1.2em;
         letter-spacing: 0.04em;
       }
@@ -80,7 +79,7 @@
         left: 15px;
         width: 280px;
         padding: 0 15px;
-        /* Add styles to match Leaflet UI elements */
+        /* styles to match Leaflet UI elements */
         background: rgba(256, 256, 256, 0.3);
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         border: 1px solid #ddd;
@@ -104,7 +103,7 @@
 
       /* Leaflet popup styles */
       .leaflet-popup-content {
-        font-family: "Quicksand", sans-serif;
+        font-family: "Alata", sans-serif;
         font-size: 1.1em;
       }
 
@@ -149,18 +148,14 @@
     <section id="about">
       <h2>Driving to the Last Frontier</h2>
       <p>
-        Spanning 40 miles of winding coastline, the stretch between Anchorage
-        and Girdwood on the Seward Highway is affectionately known as "Turnagain
-        Arm." With waterfall-adorned cliffs on one side and a mountain-lined
-        inlet on the other, the two-lane road can be as dangerous as it is
-        beautiful. The data used for this map can be found
+        While you <i>could</i> simply book a 3-hour flight to reach Alaska, why pass up on the roadtrip of a lifetime? After all, driving the Alaska Highway is a right of passage for those journeying to the Last Frontier. Taking upwards of 41 hours driving time, this beautiful and sometimes treacherous road will give you memories you'll never forget. Noted on the map are key stops to help you make the most of your trip, from large towns to rest stops to beautiful glimpses of the Yukon wilderness. Time to hit the open road! The data used for this map can be found
         <a href="route.js">here.</a>
       </p>
       <p>Map authored by Tim Higginbotham</p>
     </section>
-    <!-- Add Leaflet JS library. Check to make sure it is latest version. -->
+    
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <!-- Load a Leaflet plugin to provide geolocation. Load this after Leaflet JS.-->
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.72.0/L.Control.Locate.min.js"
       integrity="sha512-Gq+3lCPlR6oaTfAIvLeTbxvffhahkZqfiyEEu5ua7JIo9Wx1RlwHDkt0okgwjyTS303O3FKZPuyBDi/QKXvi7g=="
@@ -183,28 +178,25 @@
 
       var map = L.map("map", options);
 
-      // add zoom control to top right window position
+      // add zoom control
       L.control
         .zoom({
           position: "topright",
         })
         .addTo(map);
 
-      // add geolocation control to top right window position (Leaflet can handle multiple top-right elements)
       L.control.locate(locate_options).addTo(map);
 
-      // Get basemap URL from Leaflet Providers
       var basemap_url =
         "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png";
 
-      // Get basemap attributes from Leaflet Providers
       var basemap_attributes = {
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
         subdomains: "abcd",
         maxZoom: 19,
       };
-      // requests some map tiles
+      
       var tiles = L.tileLayer(basemap_url, basemap_attributes);
 
       map.addLayer(tiles);
@@ -232,7 +224,7 @@
           }
         },
         onEachFeature: function (feature, layer) {
-          layer.bindPopup(feature.properties.name);
+          layer.bindPopup("<b>" + feature.properties.name + "</b><br><br>" + feature.properties.info);
           layer.on({
             click: function (e) {
               map.setView(e.latlng, map.getZoom() + 1);
@@ -249,7 +241,7 @@
 
       myRoute.on("mouseover", function (e) {
         e.target.setStyle({
-          color: "red",
+          color: "black",
         });
       });
 
